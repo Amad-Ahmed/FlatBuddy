@@ -1,0 +1,245 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  ID                String              @id
+  Name              String
+  Email             String              @unique
+  Phone             Int?
+  Password          String
+  Gender            String?
+  Age               Int?
+  favorites         FavoriteAd[]
+  AdvertisementBase AdvertisementBase[]
+}
+
+enum PropertyTypeEnum {
+  BED
+  ROOM
+  HOUSE
+}
+
+enum AdvertiserTypeEnum {
+  Agent
+  Live_in_Landlord
+  Current_Flatmate
+  Live_out_Landlord
+}
+
+model AdvertisementBase {
+  AdvertisementID   String             @id
+  PropertyType      PropertyTypeEnum
+  City              String
+  Address           String
+  Floor             String
+  AdvertiserType    AdvertiserTypeEnum
+  AvailableFrom     BigInt
+  MinimumStayPeriod Int
+  MaximumStayPeriod Int
+  ScheduledCalls    Boolean
+  Title             String
+  Description       String
+  User              User               @relation(fields: [UserID], references: [ID])
+  UserID            String
+  Smoking           Boolean
+  Vegetarian        Boolean
+
+  preferences    Preference[]
+  roomsAndBeds   RoomAndBed[]
+  beds           Bed[]
+  rooms          Room[]
+  flats          Flat[]
+  flatRooms      FlatRooms[]
+  sharedSpaces   SharedSpace[]
+  availableDays  AvailableDays[]
+  amenities      Amenities[]
+  houseRules     HouseRules[]
+  photos         Photos[]
+  availableTimes AvailableTimes[]
+  FavoriteAd     FavoriteAd[]
+}
+
+model FavoriteAd {
+  userID          String
+  advertisementID String
+  user            User              @relation(fields: [userID], references: [ID])
+  advertisement   AdvertisementBase @relation(fields: [advertisementID], references: [AdvertisementID])
+
+  @@id([userID, advertisementID])
+}
+
+model RoomAndBed {
+  ID                 String            @id
+  PropertyAdID       String
+  TotalBedsRooms     Int
+  AvailableBedsRooms Int
+  NumberOfMales      Int
+  NumberOfFemales    Int
+  MinAge             Int
+  MaxAge             Int
+  PrefMinAge         Int
+  PrefMaxAge         Int
+  PrefGender         String
+  advertisement      AdvertisementBase @relation(fields: [PropertyAdID], references: [AdvertisementID])
+}
+
+enum BedTypeEnum {
+  Single
+  Double
+  Bunk
+  Sofa
+  Other
+}
+
+enum BillingPeriodEnum {
+  Weekly
+  Monthly
+  Yearly
+}
+
+model Bed {
+  ID            String            @id
+  PropertyAdID  String
+  BedType       BedTypeEnum
+  Rent          Int
+  Deposit       Int
+  BillingPeriod BillingPeriodEnum
+  IncludeBills  Boolean
+  advertisement AdvertisementBase @relation(fields: [PropertyAdID], references: [AdvertisementID])
+}
+
+enum RoomTypeEnum {
+  Single
+  Double
+  Twin
+  Triple
+  Quad
+  Other
+}
+
+model Room {
+  ID             String            @id
+  PropertyAdID   String
+  RoomType       RoomTypeEnum
+  RoomSize       Int
+  Rent           Int
+  Deposit        Int
+  BillingPeriod  BillingPeriodEnum
+  IncludeBills   Boolean
+  AttachBathroom Boolean
+  advertisement  AdvertisementBase @relation(fields: [PropertyAdID], references: [AdvertisementID])
+}
+
+enum HouseTypeEnum {
+  Flat
+  House
+  Studio
+  Portion
+}
+
+model Flat {
+  ID            String            @id
+  PropertyAdID  String
+  HouseType     HouseTypeEnum
+  PropertySize  Int
+  Rent          Int
+  Deposit       Int
+  BillingPeriod BillingPeriodEnum
+  IncludeBills  Boolean
+  advertisement AdvertisementBase @relation(fields: [PropertyAdID], references: [AdvertisementID])
+}
+
+model FlatRooms {
+  ID             String            @id
+  PropertyAdID   String
+  RoomType       RoomTypeEnum
+  AttachBathroom Boolean
+  advertisement  AdvertisementBase @relation(fields: [PropertyAdID], references: [AdvertisementID])
+}
+
+model Preference {
+  ID            String            @id
+  PropertyAdID  String
+  Student       Boolean
+  Professional  Boolean
+  PetOwners     Boolean
+  Family        Boolean
+  Male          Boolean
+  Female        Boolean
+  Couple        Boolean
+  advertisement AdvertisementBase @relation(fields: [PropertyAdID], references: [AdvertisementID])
+}
+
+model SharedSpace {
+  ID            String            @id
+  PropertyAdID  String
+  Kitchen       Boolean
+  LivingRoom    Boolean
+  Bathroom      Boolean
+  advertisement AdvertisementBase @relation(fields: [PropertyAdID], references: [AdvertisementID])
+}
+
+model AvailableDays {
+  ID            String            @id
+  PropertyAdID  String
+  Monday        Boolean
+  Tuesday       Boolean
+  Wednesday     Boolean
+  Thursday      Boolean
+  Friday        Boolean
+  Saturday      Boolean
+  Sunday        Boolean
+  advertisement AdvertisementBase @relation(fields: [PropertyAdID], references: [AdvertisementID])
+}
+
+model Amenities {
+  ID             String            @id
+  PropertyAdID   String
+  Furnished      Boolean
+  Internet       Boolean
+  Parking        Boolean
+  WashingMachine Boolean
+  SharedKitchen  Boolean
+  LivingRoom     Boolean
+  Laundry        Boolean
+  RooftopTerrace Boolean
+  Garden         Boolean
+  LoungeArea     Boolean
+  Electricity    Boolean
+  Water          Boolean
+  Heating        Boolean
+  AirConditioned Boolean
+  advertisement  AdvertisementBase @relation(fields: [PropertyAdID], references: [AdvertisementID])
+}
+
+model HouseRules {
+  ID            String            @id
+  HouseRules    String
+  PropertyAdID  String
+  advertisement AdvertisementBase @relation(fields: [PropertyAdID], references: [AdvertisementID])
+}
+
+model Photos {
+  ID            String            @id
+  PhotoValue    String
+  PropertyAdID  String
+  advertisement AdvertisementBase @relation(fields: [PropertyAdID], references: [AdvertisementID])
+}
+
+model AvailableTimes {
+  ID            String            @id
+  PropertyAdID  String
+  Morning       Boolean
+  Afternoon     Boolean
+  Evening       Boolean
+  advertisement AdvertisementBase @relation(fields: [PropertyAdID], references: [AdvertisementID])
+}
