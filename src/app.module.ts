@@ -12,11 +12,17 @@ import { AdvertisementController } from './advertisement/advertisement.controlle
 import { AdvertisementService } from './advertisement/advertisement.service';
 import { FavoriteModule } from './favorite/favorite.module';
 import { PreferenceModule } from './preference/preference.module';
+import { SharedModule } from './sharedspace/shared.module';
+import { AmenitiesModule } from './amenities/amenities.module';
+import { AvailTimesModule } from './availabletimes/availtimes.module';
 
 @Module({
   imports: [
     PrismaModule,
     FavoriteModule,
+    SharedModule,
+    AmenitiesModule,
+    AvailTimesModule,
     PreferenceModule,
     AuthModule,
     UserModule,
