@@ -7,6 +7,9 @@ import { AdvertisementModule } from './advertisement/advertisement.module';
 import { AuthController } from './auth/auth.controller';
 import { AuthService } from './auth/auth.service';
 import { ConfigModule } from '@nestjs/config';
+import { PrismaService } from './prisma/prisma.service';
+import { AdvertisementController } from './advertisement/advertisement.controller';
+import { AdvertisementService } from './advertisement/advertisement.service';
 
 @Module({
   imports: [
@@ -18,7 +21,7 @@ import { ConfigModule } from '@nestjs/config';
       isGlobal: true,
     }),
   ],
-  controllers: [],
-  providers: [],
+  controllers: [AdvertisementController],
+  providers: [PrismaService, AdvertisementService],
 })
 export class AppModule {}

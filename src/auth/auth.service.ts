@@ -39,6 +39,7 @@ export class AuthService {
 
   //function to sign up
   async signup(dto: AuthDto) {
+    console.log('dto', dto);
     // Generate the hash
     const hash = await argon.hash(dto.password);
 
@@ -68,8 +69,9 @@ export class AuthService {
       id: user.ID,
       email: user.Email,
     };
-
+    // add expiry time of 15 minutes
     const token = await this.jwt.signAsync(payload, {
+      expiresIn: '15m',
       secret: this.config.get('JWT_SECRET'),
     });
     return {

@@ -42,16 +42,16 @@ model AdvertisementBase {
   Address           String
   Floor             String
   AdvertiserType    AdvertiserTypeEnum
-  AvailableFrom     BigInt
-  MinimumStayPeriod Int
-  MaximumStayPeriod Int
-  ScheduledCalls    Boolean
+  AvailableFrom     BigInt?
+  MinimumStayPeriod Int?
+  MaximumStayPeriod Int?
+  ScheduledCalls    Boolean?
   Title             String
   Description       String
   User              User               @relation(fields: [UserID], references: [ID])
   UserID            String
-  Smoking           Boolean
-  Vegetarian        Boolean
+  Smoking           Boolean?
+  Vegetarian        Boolean?
 
   preferences    Preference[]
   roomsAndBeds   RoomAndBed[]
