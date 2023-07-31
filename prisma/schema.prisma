@@ -169,55 +169,55 @@ model FlatRooms {
 model Preference {
   ID            String            @id
   PropertyAdID  String
-  Student       Boolean
-  Professional  Boolean
-  PetOwners     Boolean
-  Family        Boolean
-  Male          Boolean
-  Female        Boolean
-  Couple        Boolean
+  Student       Boolean?
+  Professional  Boolean?
+  PetOwners     Boolean?
+  Family        Boolean?
+  Male          Boolean?
+  Female        Boolean?
+  Couple        Boolean?
   advertisement AdvertisementBase @relation(fields: [PropertyAdID], references: [AdvertisementID])
 }
 
 model SharedSpace {
   ID            String            @id
   PropertyAdID  String
-  Kitchen       Boolean
-  LivingRoom    Boolean
-  Bathroom      Boolean
+  Kitchen       Boolean?
+  LivingRoom    Boolean?
+  Bathroom      Boolean?
   advertisement AdvertisementBase @relation(fields: [PropertyAdID], references: [AdvertisementID])
 }
 
 model AvailableDays {
   ID            String            @id
   PropertyAdID  String
-  Monday        Boolean
-  Tuesday       Boolean
-  Wednesday     Boolean
-  Thursday      Boolean
-  Friday        Boolean
-  Saturday      Boolean
-  Sunday        Boolean
+  Monday        Boolean?
+  Tuesday       Boolean?
+  Wednesday     Boolean?
+  Thursday      Boolean?
+  Friday        Boolean?
+  Saturday      Boolean?
+  Sunday        Boolean?
   advertisement AdvertisementBase @relation(fields: [PropertyAdID], references: [AdvertisementID])
 }
 
 model Amenities {
   ID             String            @id
   PropertyAdID   String
-  Furnished      Boolean
-  Internet       Boolean
-  Parking        Boolean
-  WashingMachine Boolean
-  SharedKitchen  Boolean
-  LivingRoom     Boolean
-  Laundry        Boolean
-  RooftopTerrace Boolean
-  Garden         Boolean
-  LoungeArea     Boolean
-  Electricity    Boolean
-  Water          Boolean
-  Heating        Boolean
-  AirConditioned Boolean
+  Furnished      Boolean?
+  Internet       Boolean?
+  Parking        Boolean?
+  WashingMachine Boolean?
+  SharedKitchen  Boolean?
+  LivingRoom     Boolean?
+  Laundry        Boolean?
+  RooftopTerrace Boolean?
+  Garden         Boolean?
+  LoungeArea     Boolean?
+  Electricity    Boolean?
+  Water          Boolean?
+  Heating        Boolean?
+  AirConditioned Boolean?
   advertisement  AdvertisementBase @relation(fields: [PropertyAdID], references: [AdvertisementID])
 }
 
@@ -238,8 +238,8 @@ model Photos {
 model AvailableTimes {
   ID            String            @id
   PropertyAdID  String
-  Morning       Boolean
-  Afternoon     Boolean
-  Evening       Boolean
+  Morning       Boolean?
+  Afternoon     Boolean?
+  Evening       Boolean?
   advertisement AdvertisementBase @relation(fields: [PropertyAdID], references: [AdvertisementID])
 }

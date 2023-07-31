@@ -10,10 +10,14 @@ import { ConfigModule } from '@nestjs/config';
 import { PrismaService } from './prisma/prisma.service';
 import { AdvertisementController } from './advertisement/advertisement.controller';
 import { AdvertisementService } from './advertisement/advertisement.service';
+import { FavoriteModule } from './favorite/favorite.module';
+import { PreferenceModule } from './preference/preference.module';
 
 @Module({
   imports: [
     PrismaModule,
+    FavoriteModule,
+    PreferenceModule,
     AuthModule,
     UserModule,
     AdvertisementModule,
