@@ -15,11 +15,15 @@ import { PreferenceModule } from './preference/preference.module';
 import { SharedModule } from './sharedspace/shared.module';
 import { AmenitiesModule } from './amenities/amenities.module';
 import { AvailTimesModule } from './availabletimes/availtimes.module';
+import { AvailDaysModule } from './availabledays/availdays.module';
+import { HouseRulesModule } from './houserules/house.module';
 
 @Module({
   imports: [
     PrismaModule,
     FavoriteModule,
+    AvailDaysModule,
+    HouseRulesModule,
     SharedModule,
     AmenitiesModule,
     AvailTimesModule,
