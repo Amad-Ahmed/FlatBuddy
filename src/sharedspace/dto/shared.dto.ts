@@ -1,10 +1,8 @@
 import { IsNotEmpty, IsOptional } from 'class-validator';
 
 export class SharedDto {
-  @IsNotEmpty()
   ID: string;
 
-  @IsNotEmpty()
   PropertyAdID: string;
 
   @IsOptional()

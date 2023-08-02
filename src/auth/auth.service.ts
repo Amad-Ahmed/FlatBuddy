@@ -6,8 +6,7 @@ import * as argon from 'argon2';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
-import { v4 as uuidv4 } from 'uuid';
-
+import { MakeTimedIDUnique } from 'src/common-helpers/helper';
 @Injectable()
 export class AuthService {
   constructor(
@@ -81,7 +80,4 @@ export class AuthService {
       access_token: token,
     };
   }
-}
-export function MakeTimedIDUnique(): string {
-  return uuidv4();
 }

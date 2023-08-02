@@ -2,9 +2,7 @@ import { IsNotEmpty } from 'class-validator';
 import { BedTypeEnum, BillingPeriodEnum } from '@prisma/client';
 
 export class BedDto {
-  @IsNotEmpty()
   ID: string;
-  @IsNotEmpty()
   PropertyAdID: string;
   @IsNotEmpty()
   BedType: BedTypeEnum;

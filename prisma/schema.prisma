@@ -107,7 +107,7 @@ enum BillingPeriodEnum {
 }
 
 model Bed {
-  ID            String            @id
+  ID            String            @id @db.Char(40)
   PropertyAdID  String
   BedType       BedTypeEnum
   Rent          Int

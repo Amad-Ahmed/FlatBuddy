@@ -1,9 +1,7 @@
 import { IsNotEmpty, IsOptional } from 'class-validator';
 
 export class AvailTimesDto {
-  @IsNotEmpty()
   ID: string;
-  @IsNotEmpty()
   PropertyAdID: string;
 
   @IsOptional()

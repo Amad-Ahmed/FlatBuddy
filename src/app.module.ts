@@ -19,6 +19,8 @@ import { AvailDaysModule } from './availabledays/availdays.module';
 import { HouseRulesModule } from './houserules/house.module';
 import { HttpExceptionFilter } from './http-exception.filter';
 import { BedModule } from './bed/bed.module';
+import { RoomandbedController } from './roomandbed/roomandbed.controller';
+import { RoomandbedModule } from './roomandbed/roomandbed.module';
 
 @Module({
   imports: [
@@ -37,6 +39,7 @@ import { BedModule } from './bed/bed.module';
     ConfigModule.forRoot({
       isGlobal: true,
     }),
+    RoomandbedModule,
   ],
   controllers: [AdvertisementController],
   providers: [

@@ -1,11 +1,9 @@
 import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
 
 export class PreferenceDto {
-  @IsNotEmpty()
   @IsString()
   ID: string;
 
-  @IsNotEmpty()
   @IsString()
   PropertyAdID: string;
 

@@ -1,4 +1,5 @@
 import { AdvertiserTypeEnum, PropertyTypeEnum } from '@prisma/client';
+import { Type } from 'class-transformer';
 import {
   IsBoolean,
   IsEnum,
@@ -6,14 +7,20 @@ import {
   IsNotEmpty,
   IsOptional,
   IsString,
+  ValidateNested,
 } from 'class-validator';
+import { AmenitiesDto } from 'src/amenities/dto';
+import { AvailDaysDto } from 'src/availabledays/dto';
+import { AvailTimesDto } from 'src/availabletimes/dto';
+import { BedDto } from 'src/bed/dto';
+import { HouseRulesDto } from 'src/houserules/dto';
+import { PreferenceDto } from 'src/preference/dto';
+import { SharedDto } from 'src/sharedspace/dto';
 
 export class AdDto {
-  @IsNotEmpty()
   @IsString()
   AdvertisementID: string;
 
-  @IsNotEmpty()
   @IsEnum(PropertyTypeEnum)
   PropertyType: PropertyTypeEnum;
 
@@ -64,4 +71,11 @@ export class AdDto {
 
   @IsOptional()
   Vegetarian: boolean;
+
+  // Call PreferenceDto
+  @ValidateNested()
+  @Type(() => PreferenceDto)
+  preferenceDto?: PreferenceDto;
+
+  // Rest of the properties from your existing DTO
 }
