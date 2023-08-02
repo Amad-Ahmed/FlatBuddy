@@ -1,7 +1,0 @@
--- AlterTable
-ALTER TABLE "AdvertisementBase" ALTER COLUMN "AvailableFrom" DROP NOT NULL,
-ALTER COLUMN "MinimumStayPeriod" DROP NOT NULL,
-ALTER COLUMN "MaximumStayPeriod" DROP NOT NULL,
-ALTER COLUMN "ScheduledCalls" DROP NOT NULL,
-ALTER COLUMN "Smoking" DROP NOT NULL,
-ALTER COLUMN "Vegetarian" DROP NOT NULL;

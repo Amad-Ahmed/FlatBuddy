@@ -11,8 +11,8 @@ datasource db {
 }
 
 model User {
-  ID                String              @id
-  Name              String
+  ID                String              @id @db.Char(40)
+  Name              String?
   Email             String              @unique
   Phone             Int?
   Password          String

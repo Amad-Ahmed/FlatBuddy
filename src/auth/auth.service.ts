@@ -6,6 +6,7 @@ import * as argon from 'argon2';
 import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
+import { v4 as uuidv4 } from 'uuid';
 
 @Injectable()
 export class AuthService {
@@ -20,7 +21,7 @@ export class AuthService {
     // find the user by email
     const user = await this.prisma.user.findUnique({
       where: {
-        Email: dto.email,
+        Email: dto.Email,
       },
     });
     //if user does not exist then throw exception
@@ -28,7 +29,7 @@ export class AuthService {
 
     //if user exists
     // then check for password
-    const valid = await argon.verify(user.Password, dto.password);
+    const valid = await argon.verify(user.Password, dto.Password);
     if (!valid) throw new ForbiddenException('Password incorrect');
 
     delete user.Password;
@@ -40,15 +41,17 @@ export class AuthService {
   //function to sign up
   async signup(dto: AuthDto) {
     console.log('dto', dto);
+    console.log("Received user's details for signup");
     // Generate the hash
-    const hash = await argon.hash(dto.password);
+    const hash = await argon.hash(dto.Password);
 
     try {
       const user = await this.prisma.user.create({
         data: {
-          ID: dto.id,
-          Name: dto.name,
-          Email: dto.email,
+          // ID: dto.id,
+          ID: MakeTimedIDUnique(),
+          Name: dto.Name,
+          Email: dto.Email,
           Password: hash,
         },
       });
@@ -78,4 +81,7 @@ export class AuthService {
       access_token: token,
     };
   }
+}
+export function MakeTimedIDUnique(): string {
+  return uuidv4();
 }

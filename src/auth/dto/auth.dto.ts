@@ -7,21 +7,22 @@ import {
 } from 'class-validator';
 
 export class AuthDto {
-  @IsNotEmpty()
+  // @IsNotEmpty()
+  @IsOptional()
   @IsString()
   id: string;
 
-  @IsNotEmpty()
+  @IsOptional()
   @IsString()
-  name: string;
+  Name: string;
 
   @IsEmail()
   @IsNotEmpty()
-  email: string;
+  Email: string;
 
   @IsNotEmpty()
   @IsString()
-  password: string;
+  Password: string;
 
   @IsInt()
   @IsOptional() // Make phone optional
