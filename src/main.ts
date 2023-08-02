@@ -27,6 +27,7 @@ async function bootstrap() {
     .addTag('favorite')
     .addTag('availableTimes')
     .addTag('preference')
+    .addTag('beds')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
