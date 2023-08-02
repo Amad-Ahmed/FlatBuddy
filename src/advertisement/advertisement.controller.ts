@@ -5,9 +5,11 @@ import { AdvertisementService } from './advertisement.service';
 import { GetUser } from 'src/auth/decorator';
 import { AdvertiserTypeEnum, PropertyTypeEnum, User } from '@prisma/client';
 import { AdDto } from './dto';
+import { ApiTags } from '@nestjs/swagger';
 
 @UseGuards(JwtGuard)
 @Controller('advertisement')
+@ApiTags('advertisement')
 export class AdvertisementController {
   constructor(
     private prisma: PrismaService,

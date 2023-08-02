@@ -13,9 +13,11 @@ import { GetUser } from 'src/auth/decorator';
 import { JwtGuard } from 'src/auth/guard';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { UserService } from './user.service';
+import { ApiTags } from '@nestjs/swagger';
 
 @UseGuards(JwtGuard)
 @Controller('users')
+@ApiTags('users')
 export class UserController {
   constructor(
     private readonly prisma: PrismaService,

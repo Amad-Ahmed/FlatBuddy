@@ -3,9 +3,11 @@ import { JwtGuard } from 'src/auth/guard';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { AvailTimesService } from './availtimes.service';
 import { AvailTimesDto } from './dto';
+import { ApiTags } from '@nestjs/swagger';
 
 @UseGuards(JwtGuard)
 @Controller('availableTimes')
+@ApiTags('availableTimes')
 export class AvailTimesController {
   constructor(
     private prismaService: PrismaService,

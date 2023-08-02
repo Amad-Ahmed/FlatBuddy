@@ -3,9 +3,11 @@ import { JwtGuard } from 'src/auth/guard';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { SharedService } from './shared.service';
 import { SharedDto } from './dto';
+import { ApiTags } from '@nestjs/swagger';
 
 @UseGuards(JwtGuard)
 @Controller('sharedSpace')
+@ApiTags('sharedSpace')
 export class SharedController {
   constructor(
     private prismaService: PrismaService,
