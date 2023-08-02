@@ -17,6 +17,7 @@ import { AmenitiesModule } from './amenities/amenities.module';
 import { AvailTimesModule } from './availabletimes/availtimes.module';
 import { AvailDaysModule } from './availabledays/availdays.module';
 import { HouseRulesModule } from './houserules/house.module';
+import { HttpExceptionFilter } from './http-exception.filter';
 
 @Module({
   imports: [
@@ -36,6 +37,13 @@ import { HouseRulesModule } from './houserules/house.module';
     }),
   ],
   controllers: [AdvertisementController],
-  providers: [PrismaService, AdvertisementService],
+  providers: [
+    PrismaService,
+    AdvertisementService,
+    {
+      provide: 'APP_FILTER',
+      useClass: HttpExceptionFilter,
+    },
+  ],
 })
 export class AppModule {}
