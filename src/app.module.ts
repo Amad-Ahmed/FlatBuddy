@@ -18,6 +18,7 @@ import { AvailTimesModule } from './availabletimes/availtimes.module';
 import { AvailDaysModule } from './availabledays/availdays.module';
 import { HouseRulesModule } from './houserules/house.module';
 import { HttpExceptionFilter } from './http-exception.filter';
+import { BedModule } from './bed/bed.module';
 
 @Module({
   imports: [
@@ -35,6 +36,7 @@ import { HttpExceptionFilter } from './http-exception.filter';
     ConfigModule.forRoot({
       isGlobal: true,
     }),
+    BedModule,
   ],
   controllers: [AdvertisementController],
   providers: [

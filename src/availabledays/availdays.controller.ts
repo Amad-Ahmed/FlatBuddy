@@ -17,8 +17,8 @@ export class AvailDaysController {
   // function to add available days on basis of Advertisement id
   @Post('addAvailDays')
   async addAvailDays(@Body() dto: AvailDaysDto) {
-    dto.Monday = true;
-    dto.ID = '2';
+    // dto.Monday = true;
+    // dto.ID = '2';
     return this.availDaysService.addAvailDays(dto);
   }
 

@@ -12,7 +12,7 @@ export class AvailDaysService {
       data: {
         ID: dto.ID,
         PropertyAdID: dto.PropertyAdID,
-        Monday: dto.Monday,
+        Monday: dto.Monday
       },
     });
   }

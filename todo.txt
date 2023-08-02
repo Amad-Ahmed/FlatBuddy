@@ -1,0 +1,5 @@
+RoomAndBed
+Bed
+Room
+Flat
+FlatRooms
