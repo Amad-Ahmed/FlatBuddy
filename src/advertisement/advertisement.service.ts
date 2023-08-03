@@ -14,7 +14,7 @@ export class AdvertisementService {
       console.log('Create Advertisement data');
       const adID = MakeTimedIDUnique();
       console.log('Generated Advertisement ID:', adID);
-      const advertisementBase = this.prisma.advertisementBase.create({
+      const advertisementBase = await this.prisma.advertisementBase.create({
         data: {
           AdvertisementID: adID,
           Title: dto.Title,
@@ -34,108 +34,152 @@ export class AdvertisementService {
         },
       });
       console.log('Advertisement Base created');
-      // // create entry in preference table
-      const preference = this.prisma.preference.create({
+      // create entry in preference table
+      const preference = await this.prisma.preference.create({
         data: {
           ID: MakeTimedIDUnique(),
           PropertyAdID: adID,
-          Professional: dto.preferenceDto.Professional,
-          Student: dto.preferenceDto.Student,
-          Couple: dto.preferenceDto.Couple,
-          Family: dto.preferenceDto.Family,
-          Male: dto.preferenceDto.Male,
-          Female: dto.preferenceDto.Female,
-          PetOwners: dto.preferenceDto.PetOwners,
+          Professional: dto.Preference.Professional,
+          Student: dto.Preference.Student,
+          Couple: dto.Preference.Couple,
+          Family: dto.Preference.Family,
+          Male: dto.Preference.Male,
+          Female: dto.Preference.Female,
+          PetOwners: dto.Preference.PetOwners,
         },
       });
+      console.log(preference);
       console.log('Preference created');
-      // console.log(dto.bedDto.BillingPeriod);
-      // console.log(dto.bedDto.BedType);
-      // //check if property type is BED
-      // if (dto.PropertyType === 'BED') {
-      //   const bedDto: BedDto = {
-      //     ID: MakeTimedIDUnique(),
-      //     PropertyAdID: adID,
-      //     BedType: dto.bedDto.BedType as BedTypeEnum,
-      //     Rent: dto.bedDto.Rent,
-      //     Deposit: dto.bedDto.Deposit,
-      //     BillingPeriod: dto.bedDto.BillingPeriod,
-      //     IncludeBills: dto.bedDto.IncludeBills,
-      //   };
-      //   const bed = this.prisma.bed.create({
-      //     data: bedDto,
-      //   });
-      // }
 
-      // // create entry in shared space table
+      // create entry for shared space table
+      const sharedSpace = await this.prisma.sharedSpace.create({
+        data: {
+          ID: MakeTimedIDUnique(),
+          PropertyAdID: adID,
+          LivingRoom: dto.SharedSpace.LivingRoom,
+          Kitchen: dto.SharedSpace.Kitchen,
+          Bathroom: dto.SharedSpace.Bathroom,
+        },
+      });
 
-      // const sharedSpace = this.prisma.sharedSpace.create({
-      //   data: {
-      //     ID: MakeTimedIDUnique(),
-      //     PropertyAdID: adID,
-      //     LivingRoom: dto.sharedSpaceDto.LivingRoom,
-      //     Kitchen: dto.sharedSpaceDto.Kitchen,
-      //     Bathroom: dto.sharedSpaceDto.Bathroom,
-      //   },
-      // });
+      console.log(sharedSpace);
+      console.log('Shared Space created');
 
-      // // create available days in available days table
-      // const availableDays = this.prisma.availableDays.create({
-      //   data: {
-      //     ID: MakeTimedIDUnique(),
-      //     PropertyAdID: adID,
-      //     Monday: dto.availableDaysDto.Monday,
-      //     Tuesday: dto.availableDaysDto.Tuesday,
-      //     Wednesday: dto.availableDaysDto.Wednesday,
-      //     Thursday: dto.availableDaysDto.Thursday,
-      //     Friday: dto.availableDaysDto.Friday,
-      //     Saturday: dto.availableDaysDto.Saturday,
-      //     Sunday: dto.availableDaysDto.Sunday,
-      //   },
-      // });
+      // create entry for available days table
+      const availableDays = await this.prisma.availableDays.create({
+        data: {
+          ID: MakeTimedIDUnique(),
+          PropertyAdID: adID,
+          Monday: dto.AvailableDays.Monday,
+          Tuesday: dto.AvailableDays.Tuesday,
+          Wednesday: dto.AvailableDays.Wednesday,
+          Thursday: dto.AvailableDays.Thursday,
+          Friday: dto.AvailableDays.Friday,
+          Saturday: dto.AvailableDays.Saturday,
+          Sunday: dto.AvailableDays.Sunday,
+        },
+      });
 
-      // const amenities = this.prisma.amenities.create({
-      //   data: {
-      //     ID: MakeTimedIDUnique(),
-      //     PropertyAdID: adID,
-      //     Furnished: dto.amenitiesDto.Furnished,
-      //     Internet: dto.amenitiesDto.Internet,
-      //     Parking: dto.amenitiesDto.Parking,
-      //     WashingMachine: dto.amenitiesDto.WashingMachine,
-      //     SharedKitchen: dto.amenitiesDto.SharedKitchen,
-      //     LivingRoom: dto.amenitiesDto.LivingRoom,
-      //     Laundry: dto.amenitiesDto.Laundry,
-      //     RooftopTerrace: dto.amenitiesDto.RooftopTerrace,
-      //     Garden: dto.amenitiesDto.Garden,
-      //     LoungeArea: dto.amenitiesDto.LoungeArea,
-      //     Electricity: dto.amenitiesDto.Electricity,
-      //     Water: dto.amenitiesDto.Water,
-      //     Heating: dto.amenitiesDto.Heating,
-      //     AirConditioned: dto.amenitiesDto.AirConditioned,
-      //   },
-      // });
+      console.log(availableDays);
+      console.log('Available Days created');
 
-      // // create entry in house rules table
-      // const houseRules = this.prisma.houseRules.create({
-      //   data: {
-      //     ID: MakeTimedIDUnique(),
-      //     PropertyAdID: adID,
-      //     HouseRules: dto.houseRulesDto.HouseRules,
-      //   },
-      // });
+      // create entry for house rules table
+      const houseRules = await this.prisma.houseRules.create({
+        data: {
+          ID: MakeTimedIDUnique(),
+          PropertyAdID: adID,
+          HouseRules: dto.HouseRules.HouseRules,
+        },
+      });
 
-      // // create Available Times in table
-      // const availableTimes = this.prisma.availableTimes.create({
-      //   data: {
-      //     ID: MakeTimedIDUnique(),
-      //     PropertyAdID: adID,
-      //     Morning: dto.availableTimesDto.Morning,
-      //     Afternoon: dto.availableTimesDto.Afternoon,
-      //     Evening: dto.availableTimesDto.Evening,
-      //   },
-      // });
+      console.log(houseRules);
+      console.log('House Rules created');
 
-      return advertisementBase; // Return the advertisementBase record
+      // create entry for amenities table
+      const amenities = await this.prisma.amenities.create({
+        data: {
+          ID: MakeTimedIDUnique(),
+          PropertyAdID: adID,
+          Furnished: dto.Amenities.Furnished,
+          Internet: dto.Amenities.Internet,
+          Parking: dto.Amenities.Parking,
+          WashingMachine: dto.Amenities.WashingMachine,
+          SharedKitchen: dto.Amenities.SharedKitchen,
+          LivingRoom: dto.Amenities.LivingRoom,
+          Laundry: dto.Amenities.Laundry,
+          Garden: dto.Amenities.Garden,
+          LoungeArea: dto.Amenities.LoungeArea,
+          Electricity: dto.Amenities.Electricity,
+          Water: dto.Amenities.Water,
+          Heating: dto.Amenities.Heating,
+          AirConditioned: dto.Amenities.AirConditioned,
+          RooftopTerrace: dto.Amenities.RooftopTerrace,
+        },
+      });
+
+      console.log(amenities);
+      console.log('Amenities created');
+
+      // create entry for available times table
+      const availableTimes = await this.prisma.availableTimes.create({
+        data: {
+          ID: MakeTimedIDUnique(),
+          PropertyAdID: adID,
+          Morning: dto.AvailableTimes.Morning,
+          Afternoon: dto.AvailableTimes.Afternoon,
+          Evening: dto.AvailableTimes.Evening,
+        },
+      });
+
+      console.log(availableTimes);
+      console.log('Available Times created');
+
+      // Create entry for Beds table if beds are available
+      if (dto.Beds && dto.Beds.length > 0) {
+        const beds = await Promise.all(
+          dto.Beds.map(async (bed: BedDto) => {
+            return await this.prisma.bed.create({
+              data: {
+                ID: MakeTimedIDUnique(),
+                PropertyAdID: adID,
+                BedType: bed.BedType,
+                Rent: bed.Rent,
+                Deposit: bed.Deposit,
+                BillingPeriod: bed.BillingPeriod,
+                IncludeBills: bed.IncludeBills,
+              },
+            });
+          }),
+        );
+        console.log(beds);
+        console.log('Beds created');
+      }
+
+      // create entry for RoomAndBed Table
+      const roomAndBed = await this.prisma.roomAndBed.create({
+        data: {
+          ID: MakeTimedIDUnique(),
+          PropertyAdID: adID,
+          TotalBedsRooms: dto.RoomAndBed.TotalBedsRooms,
+          AvailableBedsRooms: dto.RoomAndBed.AvailableBedsRooms,
+          NumberOfFemales: dto.RoomAndBed.NumberOfFemales,
+          NumberOfMales: dto.RoomAndBed.NumberOfMales,
+          MinAge: dto.RoomAndBed.MinAge,
+          MaxAge: dto.RoomAndBed.MaxAge,
+          PrefGender: dto.RoomAndBed.PrefGender,
+          PrefMaxAge: dto.RoomAndBed.PrefMaxAge,
+          PrefMinAge: dto.RoomAndBed.PrefMinAge,
+        },
+      });
+
+      console.log(roomAndBed);
+      console.log('Room and Bed created');
+
+      // return advertisementBaseJson; // Return the advertisementBase record
+      // return JSON.parse(JSON.stringify(advertisementBase));
+      return JSON.stringify(advertisementBase, (_, v) =>
+        typeof v === 'bigint' ? v.toString() : v,
+      );
     } catch (err) {
       console.log(err);
     }

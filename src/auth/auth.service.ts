@@ -73,7 +73,7 @@ export class AuthService {
     };
     // add expiry time of 15 minutes
     const token = await this.jwt.signAsync(payload, {
-      expiresIn: '15m',
+      expiresIn: '60m',
       secret: this.config.get('JWT_SECRET'),
     });
     return {

@@ -20,11 +20,8 @@ export class AdvertisementController {
   //function to create a new advertisement
   @Post('createAdvertisement')
   async createAdvertisement(@GetUser() user: User, @Body() dto: AdDto) {
-    console.log('Create Advertisement data');
-    console.log(dto.Title);
-    console.log('Pre-existing User');
-    console.log(user.ID);
     dto.UserID = user.ID;
+    console.log('Create Advertisement data');
     console.log('Property Type Enum');
     console.log(PropertyTypeEnum[dto.PropertyType]);
     dto.PropertyType = PropertyTypeEnum[dto.PropertyType];
