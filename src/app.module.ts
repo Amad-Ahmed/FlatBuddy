@@ -21,11 +21,17 @@ import { HttpExceptionFilter } from './http-exception.filter';
 import { BedModule } from './bed/bed.module';
 import { RoomandbedController } from './roomandbed/roomandbed.controller';
 import { RoomandbedModule } from './roomandbed/roomandbed.module';
+import { RoomModule } from './room/room.module';
+import { FlatModule } from './flat/flat.module';
+import { FlatRoomModule } from './flatrooms/flatrooms.module';
 
 @Module({
   imports: [
     PrismaModule,
     BedModule,
+    FlatModule,
+    FlatRoomModule,
+    RoomModule,
     FavoriteModule,
     AvailDaysModule,
     HouseRulesModule,

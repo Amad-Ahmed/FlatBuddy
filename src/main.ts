@@ -29,6 +29,9 @@ async function bootstrap() {
     .addTag('availableTimes')
     .addTag('preference')
     .addTag('beds')
+    .addTag('rooms')
+    .addTag('flats')
+    .addTag('flatRooms')
     .addBearerAuth()
     .build();
   const document = SwaggerModule.createDocument(app, config);
