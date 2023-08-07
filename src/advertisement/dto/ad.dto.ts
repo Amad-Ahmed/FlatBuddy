@@ -105,9 +105,9 @@ export class AdDto {
   // HouseRules?: HouseRulesDto;
 
   @IsOptional()
-  @ValidateNested({ each: true })
+  @ValidateNested()
   @Type(() => HouseRulesDto)
-  HouseRules?: HouseRulesDto[];
+  HouseRules?: HouseRulesDto;
 
   //Include AvailableTimesDto as a property
   @IsOptional()

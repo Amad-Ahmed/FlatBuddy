@@ -35,11 +35,9 @@ export class AdvertisementService {
       console.log('Available Days created');
 
       // create entry for house rules table
-      if (dto.HouseRules && dto.HouseRules.length > 0) {
-        const houseRules = await this.createHouseRules(dto, adID);
-        console.log(houseRules);
-        console.log('House Rules created');
-      }
+      const houseRules = await this.createHouseRules(dto, adID);
+      console.log(houseRules);
+      console.log('House Rules created');
 
       // create entry for amenities table
       const amenities = await this.createAmenities(dto, adID);
@@ -158,7 +156,7 @@ export class AdvertisementService {
       //   where: { PropertyAdID: dto.AdvertisementID },
       //   select: { ID: true },
       // });
-      const houseRulesID = await this.prisma.houseRules.findMany({
+      const houseRulesID = await this.prisma.houseRules.findFirst({
         where: { PropertyAdID: dto.AdvertisementID },
         select: { ID: true },
       });
@@ -209,19 +207,23 @@ export class AdvertisementService {
       //     HouseRules: dto.HouseRules.HouseRules,
       //   },
       // });
-      if (dto.HouseRules.length > 0) {
-        await Promise.all(
-          dto.HouseRules.map(async (rule: HouseRulesDto, index) => {
-            const rulesIdtoUpdate = houseRulesID[index].ID;
-            const houseRules = await this.prisma.houseRules.update({
-              where: { PropertyAdID: dto.AdvertisementID, ID: rulesIdtoUpdate },
-              data: {
-                HouseRules: rule.HouseRules,
-              },
-            });
-          }),
-        );
-      }
+      // await Promise.all(
+      //   dto.HouseRules.map(async (rule: HouseRulesDto, index) => {
+      //     const rulesIdtoUpdate = houseRulesID[index].ID;
+      //     const houseRules = await this.prisma.houseRules.update({
+      //       where: { PropertyAdID: dto.AdvertisementID, ID: rulesIdtoUpdate },
+      //       data: {
+      //         HouseRules: rule.HouseRules,
+      //       },
+      //     });
+      //   }),
+      // );
+      await this.prisma.houseRules.update({
+        where: { PropertyAdID: dto.AdvertisementID, ID: houseRulesID.ID },
+        data: {
+          HouseRules: dto.HouseRules.HouseRules,
+        },
+      });
 
       console.log('House Rules updated');
 
@@ -438,17 +440,25 @@ export class AdvertisementService {
 
   async createHouseRules(dto: AdDto, adID: string) {
     console.log('Inside createHouseRules');
-    return await Promise.all(
-      dto.HouseRules.map(async (rule: HouseRulesDto) => {
-        return await this.prisma.houseRules.create({
-          data: {
-            ID: MakeTimedIDUnique(),
-            PropertyAdID: adID,
-            HouseRules: rule.HouseRules,
-          },
-        });
-      }),
-    );
+    return await this.prisma.houseRules.create({
+      data: {
+        ID: MakeTimedIDUnique(),
+        PropertyAdID: adID,
+        HouseRules: dto.HouseRules.HouseRules,
+      },
+    });
+
+    // return await Promise.all(
+    //   dto.HouseRules.map(async (rule: HouseRulesDto) => {
+    //     return await this.prisma.houseRules.create({
+    //       data: {
+    //         ID: MakeTimedIDUnique(),
+    //         PropertyAdID: adID,
+    //         HouseRules: rule.HouseRules,
+    //       },
+    //     });
+    //   }),
+    // );
   }
 
   async createRoomAndBed(dto: AdDto, adID: string) {
