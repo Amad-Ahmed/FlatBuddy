@@ -42,8 +42,93 @@ export class AdvertisementController {
   @Get('getAllAdvertisements')
   async getAllAdvertisements() {
     const advertisements = await this.prisma.advertisementBase.findMany();
+
+    const advertisementWithDetails = await Promise.all(
+      advertisements.map(async (advertisement) => {
+        const preference = await this.prisma.preference.findFirst({
+          where: {
+            PropertyAdID: advertisement.AdvertisementID,
+          },
+        });
+        const amenities = await this.prisma.amenities.findFirst({
+          where: {
+            PropertyAdID: advertisement.AdvertisementID,
+          },
+        });
+        const houseRules = await this.prisma.houseRules.findFirst({
+          where: {
+            PropertyAdID: advertisement.AdvertisementID,
+          },
+        });
+        const availableDays = await this.prisma.availableDays.findFirst({
+          where: {
+            PropertyAdID: advertisement.AdvertisementID,
+          },
+        });
+        const availableTimes = await this.prisma.availableTimes.findFirst({
+          where: {
+            PropertyAdID: advertisement.AdvertisementID,
+          },
+        });
+        const sharedSpaces = await this.prisma.sharedSpace.findFirst({
+          where: {
+            PropertyAdID: advertisement.AdvertisementID,
+          },
+        });
+        // if entry in beds table is found then return
+        const beds = await this.prisma.bed.findMany({
+          where: {
+            PropertyAdID: advertisement.AdvertisementID,
+          },
+        });
+
+        // if entry in rooms table is found then return
+        const rooms = await this.prisma.room.findMany({
+          where: {
+            PropertyAdID: advertisement.AdvertisementID,
+          },
+        });
+
+        // if entry in flatRooms table is found then return
+        const flatRooms = await this.prisma.flatRooms.findMany({
+          where: {
+            PropertyAdID: advertisement.AdvertisementID,
+          },
+        });
+
+        // if entry in RoomAndBed table is found then return
+        const roomAndBed = await this.prisma.roomAndBed.findMany({
+          where: {
+            PropertyAdID: advertisement.AdvertisementID,
+          },
+        });
+
+        // if entry in flats table is found then return
+        const flats = await this.prisma.flat.findMany({
+          where: {
+            PropertyAdID: advertisement.AdvertisementID,
+          },
+        });
+
+        return {
+          ...advertisement,
+          preference,
+          amenities,
+          houseRules,
+          availableDays,
+          availableTimes,
+          sharedSpaces,
+          beds,
+          rooms,
+          flatRooms,
+          roomAndBed,
+          flats,
+        };
+      }),
+    );
+
     // custom JSON.stringify to convert bigint to string
-    return JSON.stringify(advertisements, (key, value) =>
+    return JSON.stringify(advertisementWithDetails, (key, value) =>
       typeof value === 'bigint' ? value.toString() : value,
     );
   }

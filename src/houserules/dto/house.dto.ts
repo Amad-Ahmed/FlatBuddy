@@ -1,3 +1,4 @@
+import { ApiProperty } from '@nestjs/swagger';
 import { IsNotEmpty, IsOptional, IsString } from 'class-validator';
 
 export class HouseRulesDto {
@@ -6,5 +7,6 @@ export class HouseRulesDto {
 
   @IsNotEmpty()
   @IsString()
+  @ApiProperty({ required: true, default: 'No smoking' })
   HouseRules: string;
 }

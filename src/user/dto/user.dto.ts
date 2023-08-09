@@ -1,3 +1,4 @@
+import { ApiProperty } from '@nestjs/swagger';
 import {
   IsEmail,
   IsNotEmpty,
@@ -25,9 +26,11 @@ export class UserDto {
 
   @IsInt()
   @IsOptional() // Make phone optional
+  @ApiProperty({ required: false, default: 1234567890 })
   phone?: number;
 
   @IsOptional()
+  @ApiProperty({ required: false, default: 'Male' })
   gender?: string;
 
   @IsInt()
