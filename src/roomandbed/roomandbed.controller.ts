@@ -1,12 +1,23 @@
-import { Body, Controller, Get, Injectable, Post, Put } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Injectable,
+  Post,
+  Put,
+  UseGuards,
+} from '@nestjs/common';
 
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 import { RoomandbedService } from './roomandbed.service';
 import { RoomandBedDto } from './dto';
+import { JwtGuard } from 'src/auth/guard';
 
 @Controller('roomandbed')
 @ApiTags('roomandbed')
-@Injectable()
+@UseGuards(JwtGuard)
+@ApiBearerAuth()
+// @Injectable()
 export class RoomandbedController {
   constructor(private readonly roomandbedService: RoomandbedService) {}
 

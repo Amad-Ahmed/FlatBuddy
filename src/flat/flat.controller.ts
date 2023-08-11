@@ -1,11 +1,22 @@
-import { Body, Controller, Get, Injectable, Post, Put } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Injectable,
+  Post,
+  Put,
+  UseGuards,
+} from '@nestjs/common';
 import { FlatDto } from './dto/index';
 import { FlatService } from './flat.service';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { JwtGuard } from 'src/auth/guard';
 
 @Controller('flats')
 @ApiTags('flats')
-@Injectable()
+@UseGuards(JwtGuard)
+@ApiBearerAuth()
+// @Injectable()
 export class FlatController {
   constructor(private readonly flatsService: FlatService) {}
 

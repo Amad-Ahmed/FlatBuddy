@@ -3,11 +3,12 @@ import { JwtGuard } from 'src/auth/guard';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { AvailDaysService } from './availdays.service';
 import { AvailDaysDto } from './dto';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
 @UseGuards(JwtGuard)
 @Controller('availableDays')
 @ApiTags('availableDays')
+@ApiBearerAuth()
 export class AvailDaysController {
   constructor(
     private prismaService: PrismaService,

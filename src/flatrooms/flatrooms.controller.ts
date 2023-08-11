@@ -1,11 +1,22 @@
-import { Body, Controller, Get, Injectable, Post, Put } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Get,
+  Injectable,
+  Post,
+  Put,
+  UseGuards,
+} from '@nestjs/common';
 import { FlatRoomDto } from './dto/index';
 import { FlatRoomService } from './flatrooms.service';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
+import { JwtGuard } from 'src/auth/guard';
 
 @Controller('flatrooms')
 @ApiTags('flatRooms')
-@Injectable()
+@UseGuards(JwtGuard)
+@ApiBearerAuth()
+// @Injectable()
 export class FlatRoomController {
   constructor(private readonly flatRoomService: FlatRoomService) {}
 

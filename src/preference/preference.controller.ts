@@ -3,11 +3,12 @@ import { JwtGuard } from 'src/auth/guard';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { PreferenceService } from './preference.service';
 import { PreferenceDto } from './dto';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
 @UseGuards(JwtGuard)
 @Controller('preference')
 @ApiTags('preference')
+@ApiBearerAuth()
 export class PreferenceController {
   constructor(
     private prismaService: PrismaService,

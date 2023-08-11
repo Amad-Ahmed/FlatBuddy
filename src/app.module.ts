@@ -24,10 +24,16 @@ import { RoomandbedModule } from './roomandbed/roomandbed.module';
 import { RoomModule } from './room/room.module';
 import { FlatModule } from './flat/flat.module';
 import { FlatRoomModule } from './flatrooms/flatrooms.module';
+import { PhotoModule } from './photos/photo.module';
+import { NestjsFormDataModule } from 'nestjs-form-data';
+import { MulterModule } from '@nestjs/platform-express';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 
 @Module({
   imports: [
     PrismaModule,
+    PhotoModule,
     BedModule,
     FlatModule,
     FlatRoomModule,
@@ -46,6 +52,13 @@ import { FlatRoomModule } from './flatrooms/flatrooms.module';
       isGlobal: true,
     }),
     RoomandbedModule,
+    NestjsFormDataModule,
+    MulterModule.register({
+      dest: './uploads',
+    }),
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, '..', 'files'),
+    }),
   ],
   controllers: [AdvertisementController],
   providers: [

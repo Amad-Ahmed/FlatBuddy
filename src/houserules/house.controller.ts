@@ -3,11 +3,12 @@ import { JwtGuard } from 'src/auth/guard';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { HouseRulesService } from './house.service';
 import { HouseRulesDto } from './dto';
-import { ApiTags } from '@nestjs/swagger';
+import { ApiBearerAuth, ApiTags } from '@nestjs/swagger';
 
 @UseGuards(JwtGuard)
 @Controller('houseRules')
 @ApiTags('houseRules')
+@ApiBearerAuth()
 export class HouseRulesController {
   constructor(
     private prismaService: PrismaService,
