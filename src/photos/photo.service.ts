@@ -15,10 +15,29 @@ export class PhotoService {
     const photo = await this.prisma.photos.create({
       data: {
         ID: MakeTimedIDUnique(),
-        PropertyAdID: photoDto.PropertyAdID,
+        // PropertyAdID: photoDto.PropertyAdID,
         PhotoValue: filename,
       },
     });
     return photo;
+  }
+
+  async getPhotos(propertyAdID: string) {
+    const photos = await this.prisma.photos.findMany({
+      where: {
+        PropertyAdID: propertyAdID,
+      },
+    });
+    return photos;
+  }
+
+  // function to delete all photos which null value in their PropertyAdID
+  async deleteNullPhotos() {
+    const photos = await this.prisma.photos.deleteMany({
+      where: {
+        PropertyAdID: null,
+      },
+    });
+    return photos;
   }
 }

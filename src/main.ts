@@ -8,9 +8,9 @@ import { NestExpressApplication } from '@nestjs/platform-express';
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
-  app.useStaticAssets('uploads', {
-    prefix: '/uploads',
-  });
+  // app.useStaticAssets('uploads', {
+  //   prefix: '/uploads',
+  // });
   // app.useGlobalPipes(
   //   new ValidationPipe({
   //     whitelist: true,
@@ -44,6 +44,6 @@ async function bootstrap() {
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);
 
-  await app.listen(4000);
+  await app.listen(3000);
 }
 bootstrap();

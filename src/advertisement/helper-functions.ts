@@ -4,9 +4,11 @@ import { MakeTimedIDUnique } from 'src/common-helpers/helper';
 import { BedDto } from 'src/bed/dto';
 import { RoomDto } from 'src/room/dto';
 import { FlatRoomDto } from 'src/flatrooms/dto';
+import { DefaultArgs } from '@prisma/client/runtime/library';
+import { PrismaWithoutMethods } from 'src/prismaTypes';
 
 export async function createAdvertisementBase(
-  prisma: PrismaClient,
+  prisma: PrismaWithoutMethods,
   dto: AdDto,
   adID: string,
 ) {
@@ -32,7 +34,7 @@ export async function createAdvertisementBase(
 }
 
 export async function createPreference(
-  prisma: PrismaClient,
+  prisma: PrismaWithoutMethods,
   dto: AdDto,
   adID: string,
 ) {
@@ -53,7 +55,7 @@ export async function createPreference(
 }
 
 export async function createAmenities(
-  prisma: PrismaClient,
+  prisma: PrismaWithoutMethods,
   dto: AdDto,
   adID: string,
 ) {
@@ -81,7 +83,7 @@ export async function createAmenities(
 }
 
 export async function createSharedSpace(
-  prisma: PrismaClient,
+  prisma: PrismaWithoutMethods,
   dto: AdDto,
   adID: string,
 ) {
@@ -97,7 +99,7 @@ export async function createSharedSpace(
 }
 
 export async function createAvailableDays(
-  prisma: PrismaClient,
+  prisma: PrismaWithoutMethods,
   dto: AdDto,
   adID: string,
 ) {
@@ -117,7 +119,7 @@ export async function createAvailableDays(
 }
 
 export async function createBeds(
-  prisma: PrismaClient,
+  prisma: PrismaWithoutMethods,
   dto: AdDto,
   adID: string,
 ) {
@@ -140,7 +142,7 @@ export async function createBeds(
 }
 
 export async function createRooms(
-  prisma: PrismaClient,
+  prisma: PrismaWithoutMethods,
   dto: AdDto,
   adID: string,
 ) {
@@ -165,7 +167,7 @@ export async function createRooms(
 }
 
 export async function createFlat(
-  prisma: PrismaClient,
+  prisma: PrismaWithoutMethods,
   dto: AdDto,
   adID: string,
 ) {
@@ -185,7 +187,7 @@ export async function createFlat(
 }
 
 export async function createFlatRooms(
-  prisma: PrismaClient,
+  prisma: PrismaWithoutMethods,
   dto: AdDto,
   adID: string,
 ) {
@@ -205,7 +207,7 @@ export async function createFlatRooms(
 }
 
 export async function createAvailableTimes(
-  prisma: PrismaClient,
+  prisma: PrismaWithoutMethods,
   dto: AdDto,
   adID: string,
 ) {
@@ -221,7 +223,7 @@ export async function createAvailableTimes(
 }
 
 export async function createHouseRules(
-  prisma: PrismaClient,
+  prisma: PrismaWithoutMethods,
   dto: AdDto,
   adID: string,
 ) {
@@ -236,7 +238,7 @@ export async function createHouseRules(
 }
 
 export async function createRoomAndBed(
-  prisma: PrismaClient,
+  prisma: PrismaWithoutMethods,
   dto: AdDto,
   adID: string,
 ) {
@@ -258,7 +260,7 @@ export async function createRoomAndBed(
 }
 
 export async function updateAdvertisementBase(
-  prisma: PrismaClient,
+  prisma: PrismaWithoutMethods,
   dto: AdDto,
 ) {
   console.log('Inside updateAdvertisementBase');
@@ -282,7 +284,10 @@ export async function updateAdvertisementBase(
   });
 }
 
-export async function updatePreference(prisma: PrismaClient, dto: AdDto) {
+export async function updatePreference(
+  prisma: PrismaWithoutMethods,
+  dto: AdDto,
+) {
   // fetch preferenceID
   const preferenceID = await prisma.preference.findFirst({
     where: { PropertyAdID: dto.AdvertisementID },
@@ -306,7 +311,10 @@ export async function updatePreference(prisma: PrismaClient, dto: AdDto) {
   });
 }
 
-export async function updateSharedSpace(prisma: PrismaClient, dto: AdDto) {
+export async function updateSharedSpace(
+  prisma: PrismaWithoutMethods,
+  dto: AdDto,
+) {
   //fetch sharedSpaceID
   const sharedSpaceID = await prisma.sharedSpace.findFirst({
     where: { PropertyAdID: dto.AdvertisementID },
@@ -327,7 +335,10 @@ export async function updateSharedSpace(prisma: PrismaClient, dto: AdDto) {
   });
 }
 
-export async function updateAvailableDays(prisma: PrismaClient, dto: AdDto) {
+export async function updateAvailableDays(
+  prisma: PrismaWithoutMethods,
+  dto: AdDto,
+) {
   //fetch availableDaysID
   const availableDaysID = await prisma.availableDays.findFirst({
     where: { PropertyAdID: dto.AdvertisementID },
@@ -352,7 +363,10 @@ export async function updateAvailableDays(prisma: PrismaClient, dto: AdDto) {
   });
 }
 
-export async function updateHouseRules(prisma: PrismaClient, dto: AdDto) {
+export async function updateHouseRules(
+  prisma: PrismaWithoutMethods,
+  dto: AdDto,
+) {
   //fetch houseRulesID
   const houseRulesID = await prisma.houseRules.findFirst({
     where: { PropertyAdID: dto.AdvertisementID },
@@ -372,7 +386,10 @@ export async function updateHouseRules(prisma: PrismaClient, dto: AdDto) {
   });
 }
 
-export async function updateAmenities(prisma: PrismaClient, dto: AdDto) {
+export async function updateAmenities(
+  prisma: PrismaWithoutMethods,
+  dto: AdDto,
+) {
   //fetch amenitiesID
   const amenitiesID = await prisma.amenities.findFirst({
     where: { PropertyAdID: dto.AdvertisementID },
@@ -405,7 +422,10 @@ export async function updateAmenities(prisma: PrismaClient, dto: AdDto) {
   });
 }
 
-export async function updateAvailableTimes(prisma: PrismaClient, dto: AdDto) {
+export async function updateAvailableTimes(
+  prisma: PrismaWithoutMethods,
+  dto: AdDto,
+) {
   //fetch availableTimesID
   const availableTimesID = await prisma.availableTimes.findFirst({
     where: { PropertyAdID: dto.AdvertisementID },
@@ -427,7 +447,7 @@ export async function updateAvailableTimes(prisma: PrismaClient, dto: AdDto) {
   });
 }
 
-export async function updateBeds(prisma: PrismaClient, dto: AdDto) {
+export async function updateBeds(prisma: PrismaWithoutMethods, dto: AdDto) {
   const bedID = await prisma.bed.findMany({
     where: { PropertyAdID: dto.AdvertisementID },
     select: { ID: true },
@@ -455,7 +475,10 @@ export async function updateBeds(prisma: PrismaClient, dto: AdDto) {
   );
 }
 
-export async function updateRoomAndBed(prisma: PrismaClient, dto: AdDto) {
+export async function updateRoomAndBed(
+  prisma: PrismaWithoutMethods,
+  dto: AdDto,
+) {
   // fetch room and bed ID from room and bed table using advertisement ID
   const roomAndBedID = await prisma.roomAndBed.findFirst({
     where: { PropertyAdID: dto.AdvertisementID },
@@ -483,7 +506,7 @@ export async function updateRoomAndBed(prisma: PrismaClient, dto: AdDto) {
   });
 }
 
-export async function updateRooms(prisma: PrismaClient, dto: AdDto) {
+export async function updateRooms(prisma: PrismaWithoutMethods, dto: AdDto) {
   //fetch roomID
   const roomID = await prisma.room.findMany({
     where: { PropertyAdID: dto.AdvertisementID },
@@ -512,7 +535,7 @@ export async function updateRooms(prisma: PrismaClient, dto: AdDto) {
   );
 }
 
-export async function updateFlat(prisma: PrismaClient, dto: AdDto) {
+export async function updateFlat(prisma: PrismaWithoutMethods, dto: AdDto) {
   //fetch flatID
   const flatID = await prisma.flat.findFirst({
     where: { PropertyAdID: dto.AdvertisementID },
@@ -537,7 +560,10 @@ export async function updateFlat(prisma: PrismaClient, dto: AdDto) {
   });
 }
 
-export async function updateFlatRooms(prisma: PrismaClient, dto: AdDto) {
+export async function updateFlatRooms(
+  prisma: PrismaWithoutMethods,
+  dto: AdDto,
+) {
   //fetch flatRoomsID
   const flatRoomsID = await prisma.flatRooms.findFirst({
     where: { PropertyAdID: dto.AdvertisementID },

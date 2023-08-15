@@ -54,10 +54,13 @@ import { join } from 'path';
     RoomandbedModule,
     NestjsFormDataModule,
     MulterModule.register({
-      dest: './uploads',
+      dest: 'public/img',
     }),
+    // ServeStaticModule.forRoot({
+    //   rootPath: join(__dirname, '..', 'files'),
+    // }),
     ServeStaticModule.forRoot({
-      rootPath: join(__dirname, '..', 'files'),
+      rootPath: join(__dirname, '..'),
     }),
   ],
   controllers: [AdvertisementController],

@@ -1,10 +1,11 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsNotEmpty } from 'class-validator';
+import { IsNotEmpty, IsOptional } from 'class-validator';
 import { FileSystemStoredFile, HasMimeType, IsFile } from 'nestjs-form-data';
 
 export class PhotoDto {
   ID: string;
 
+  @IsOptional()
   PropertyAdID: string;
 
   @IsNotEmpty()
